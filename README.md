@@ -59,10 +59,20 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 3. Conecte o **ESP32**, abra o código presente na pasta `Firmware-TX/Si4713`, compile e faça o upload.
 4. Conecte o **ESP8266**, abra o código presente na pasta `Firmware-RX/Si4703`, compile e faça o upload.
 
+### ⚠️ Nota de Compilação e Conflitos I2C (Troubleshooting)
+Devido às diferenças arquitetônicas entre a família AVR tradicional e a família Espressif (ESP32/ESP8266), pode ocorrer um atropelamento na alocação dos pinos do barramento I2C por parte das bibliotecas originais. 
+
+**Caso o transceptor não seja detectado no monitor serial (Erro no ESP8266 + SI470X):**
+1. Navegue até a pasta de bibliotecas da IDE do Arduino (geralmente em `Documentos/Arduino/libraries/`).
+2. Abra o arquivo fonte `SI470X.cpp` da biblioteca do receptor.
+3. Localize a instrução `Wire.end();` dentro do método de inicialização/setup e **comente-a** (adicionando `//` no início da linha). 
+4. Salve o arquivo e recompile. Isso impedirá que a biblioteca encerre o barramento prematuramente e a obrigará a respeitar os pinos (`D2` e `D1`) definidos pelo seu *firmware*.
+
+
 ### Passo 2: O Orquestrador Java
 O Orquestrador foi desenvolvido em Java com interface gráfica Swing e gerenciamento via Maven.
 1. Instale o Java JDK 23 (ou superior) e o Maven em sua máquina.
-2. Clone este repositório
+2. Faça o download do código-fonte deste repositório (via arquivo `.zip` disponibilizado pela plataforma de revisão) e extraia em sua máquina.
 3. Navegue até a pasta Java-Orquestrador.
 4. O projeto utiliza a biblioteca jSerialComm para comunicação USB assíncrona. A dependência já está configurada no pom.xml.
 5. Execute a aplicação via IDE (como VS Code, IntelliJ, Eclipse) ou linha de comando.
@@ -79,14 +89,15 @@ O Orquestrador foi desenvolvido em Java com interface gráfica Swing e gerenciam
 5. Digite um payload e envie. O dado será encapsulado em 64 bytes, transmitido em 106.1 MHz, recebido pelo nó remoto, filtrado pela Vassoura Digital e exibido de forma íntegra.
 
 ## 📖 Como Citar (Citation)
-Se este projeto foi útil para a sua pesquisa, por favor, cite nosso artigo desenvolvido no Instituto Federal do Acre (IFAC):
+*(Nota: Informações de autoria e afiliação institucional foram suprimidas para garantir a integridade da revisão double-blind. A citação completa será disponibilizada na versão final (camera-ready) após o aceite).*
 
-@inproceedings{Sa2026RDS,
-  author = {Sá, André Lucas Soares da Silva de and Oliveira, Hugo Benjamim de and Miranda, Flávio},
+```bibtex
+@inproceedings{Anonimo2026RDS,
+  author = {Autores Omitidos para Revisão Duplo-Cego},
   title = {Transmissão Assíncrona de Strings de Controle para Microcontroladores via RDS},
   year = {2026},
   publisher = {ACM},
-  booktitle = {Proceedings of the ACM Multimedia Conference}
+  booktitle = {Proceedings of the ACM Conference (Sob Revisão)}
 }
 
 ## 📄 Licença
