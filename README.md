@@ -17,7 +17,7 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 
 **Nó Transmissor (TX):**
 * 1x Microcontrolador ESP32
-* 1x Transceptor FM Adafruit Si4713
+* 1x Transmissor FM Adafruit Si4713
 * Fios de jumper (Jumpers)
 
 **Nó Receptor (RX):**
