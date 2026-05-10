@@ -1,5 +1,5 @@
 # rds-async-transmission
-An open-source Out-of-Band (OOB) communication system for IoT/embedded devices using the 57 kHz FM subcarrier (RDS) via ESP32 and Java.
+> *An open-source Out-of-Band (OOB) communication system for IoT/embedded devices using the 57 kHz FM subcarrier (RDS) via ESP32 and Java.*
 
 # 📻 Transmissão Assíncrona Out-of-Band via RDS para Sistemas Embarcados
 
@@ -56,32 +56,31 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 2. Certifique-se de instalar as seguintes bibliotecas através do Library Manager:
    * `Adafruit Si4713 Library` (Para o nó Transmissor)
    * `PU2CLR SI470X` (Para o nó Receptor)
-3. Conecte o **ESP32**, abra o código presente na pasta `Firmware-TX`, compile e faça o upload.
-4. Conecte o **ESP8266**, abra o código presente na pasta `Firmware-RX`, compile e faça o upload.
+3. Conecte o **ESP32**, abra o código presente na pasta `Firmware-TX/Si4713`, compile e faça o upload.
+4. Conecte o **ESP8266**, abra o código presente na pasta `Firmware-RX/Si4703`, compile e faça o upload.
 
 ### Passo 2: O Orquestrador Java
 O Orquestrador foi desenvolvido em Java com interface gráfica Swing e gerenciamento via Maven.
-1. Instale o Java JDK 11 (ou superior) e o Maven em sua máquina.
+1. Instale o Java JDK 23 (ou superior) e o Maven em sua máquina.
 2. Clone este repositório
 3. Navegue até a pasta Java-Orquestrador.
 4. O projeto utiliza a biblioteca jSerialComm para comunicação USB assíncrona. A dependência já está configurada no pom.xml.
 5. Execute a aplicação via IDE (como VS Code, IntelliJ, Eclipse) ou linha de comando.
 
 ### Passo 3: Operando o Sistema
-1. Alimente o ESP8266 (Receptor) via USB (apenas para energia) ou bateria. Abra o monitor serial para acompanhar a escuta passiva.
+1. Alimente o ESP8266 (Receptor) via USB (apenas para energia) ou bateria. execute o aplicativo em Java e se conecte a porta correspondente ao RX (receptor)
 
 2. Conecte o ESP32 (Transmissor) na porta USB do seu computador principal.
 
 3. Abra o Orquestrador Java, selecione a porta COM correspondente ao Transmissor e clique em "CONECTAR".
 
-4. A interface realizará o Handshake Ativo, identificará o terminal e liberará o campo de texto para a injeção da string.
+4. A interface realizará o Handshake Ativo, identificará o terminal (se é receptor ou se é Transmissor) e liberará o campo de texto para a injeção da string para o transmissor, do contrário, o app em java ativará o modo passivo de escuta RDS.
 
 5. Digite um payload e envie. O dado será encapsulado em 64 bytes, transmitido em 106.1 MHz, recebido pelo nó remoto, filtrado pela Vassoura Digital e exibido de forma íntegra.
 
 ## 📖 Como Citar (Citation)
 Se este projeto foi útil para a sua pesquisa, por favor, cite nosso artigo desenvolvido no Instituto Federal do Acre (IFAC):
 
-Snippet de código
 @inproceedings{Sa2026RDS,
   author = {Sá, André Lucas Soares da Silva de and Oliveira, Hugo Benjamim de and Miranda, Flávio},
   title = {Transmissão Assíncrona de Strings de Controle para Microcontroladores via RDS},
