@@ -52,19 +52,20 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 ## 💻 Instalação e Execução
 
 ### Passo 1: Preparando o Hardware (Firmwares)
-1. Abra a IDE do Arduino.
-2. Certifique-se de instalar as seguintes bibliotecas através do Library Manager:
+1. **Instalação de Drivers USB:** Certifique-se de que o seu sistema operacional possui os drivers adequados para comunicação serial. O NodeMCU (ESP8266) comumente requer o driver **CP210x USB to UART Bridge da Silicon Labs** (ou CH340, dependendo da fabricante da placa).
+2. Abra a IDE do Arduino.
+3. Certifique-se de instalar as seguintes bibliotecas através do Library Manager:
    * `Adafruit Si4713 Library` (Para o nó Transmissor)
    * `PU2CLR SI470X` (Para o nó Receptor)
-3. Conecte o **ESP32**, abra o código presente na pasta `Firmware-TX/Si4713`, compile e faça o upload.
-4. Conecte o **ESP8266**, abra o código presente na pasta `Firmware-RX/Si4703`, compile e faça o upload.
+4. Conecte o **ESP32**, abra o código presente na pasta `Firmware-TX/Si4713`, compile e faça o upload.
+5. Conecte o **ESP8266**, abra o código presente na pasta `Firmware-RX/Si4703`, compile e faça o upload.
 
 ### ⚠️ Nota de Compilação e Conflitos I2C (Troubleshooting)
 Devido às diferenças arquitetônicas entre a família AVR tradicional e a família Espressif (ESP32/ESP8266), pode ocorrer um atropelamento na alocação dos pinos do barramento I2C por parte das bibliotecas originais. 
 
 **Caso o transceptor não seja detectado no monitor serial (Erro no ESP8266 + SI470X):**
 1. Navegue até a pasta de bibliotecas da IDE do Arduino (geralmente em `Documentos/Arduino/libraries/`).
-2. Abra o arquivo fonte `SI470X.cpp` da biblioteca do receptor.
+2. Dentro da pasta `libraries`, procure pela pasta `PU2CLR_SI470X` Abra o arquivo fonte `SI470X.cpp` da biblioteca do receptor.
 3. Localize a instrução `Wire.end();` dentro do método de inicialização/setup e **comente-a** (adicionando `//` no início da linha). 
 4. Salve o arquivo e recompile. Isso impedirá que a biblioteca encerre o barramento prematuramente e a obrigará a respeitar os pinos (`D2` e `D1`) definidos pelo seu *firmware*.
 
