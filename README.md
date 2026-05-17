@@ -32,13 +32,22 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 ### Ligações do Transmissor (ESP32 + Si4713)
 | ESP32 Pin | Si4713 Pin | Função |
 | :--- | :--- | :--- |
-| 3V3 | VCC | Alimentação |
+| 3V3 | VIN | Alimentação |
 | GND | GND | Terra |
-| GPIO 21 | SDA | Dados I2C |
-| GPIO 22 | SCL | Clock I2C |
-| GPIO 27 | RST | Reset de Hardware |
+| D21 | SDA | Dados I2C |
+| D22 | SCL | Clock I2C |
+| D27 | RST | Reset de Hardware |
 
 ### Ligações do Receptor (ESP8266 + Si4703)
+| ESP8266 Pin | Si4703 Pin | Função |
+| :--- | :--- | :--- |
+| 3V3 | 3.3V | Alimentação |
+| GND | GND | Terra |
+| D2 | SDIO | Dados I2C |
+| D1 | SCLK | Clock I2C |
+| D5 | RST | Reset de Hardware |
+
+### Receptor Secundario (ESP8266 + RDA 5807M)
 | ESP8266 Pin | Si4703 Pin | Função |
 | :--- | :--- | :--- |
 | 3V3 | 3.3V | Alimentação |
