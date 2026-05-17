@@ -52,8 +52,8 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 | :--- | :--- | :--- |
 | 3V3 | VIN | Alimentação |
 | GND | GND | Terra |
-| D3 (GPIO 4) | SDA | Dados I2C |
-| D4 (GPIO 5) | SCL | Clock I2C |
+| D3 | SDA | Dados I2C |
+| D4 | SCL | Clock I2C |
 
 ---
 
