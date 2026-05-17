@@ -48,13 +48,12 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 | D5 | RST | Reset de Hardware |
 
 ### Receptor Secundario (ESP8266 + RDA 5807M)
-| ESP8266 Pin | Si4703 Pin | Função |
+| ESP8266 Pin | RDA 5807M Pin | Função |
 | :--- | :--- | :--- |
-| 3V3 | 3.3V | Alimentação |
+| 3V3 | VIN | Alimentação |
 | GND | GND | Terra |
-| D2 (GPIO 4) | SDIO | Dados I2C |
-| D1 (GPIO 5) | SCLK | Clock I2C |
-| D5 (GPIO 14)| RST | Reset de Hardware |
+| D3 (GPIO 4) | SDA | Dados I2C |
+| D4 (GPIO 5) | SCL | Clock I2C |
 
 ---
 
