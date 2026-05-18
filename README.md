@@ -1,113 +1,110 @@
+*Read this in other languages: [Português](README.pt-br.md)*
+
 # rds-async-transmission
 > *An open-source Out-of-Band (OOB) communication system for IoT/embedded devices using the 57 kHz FM subcarrier (RDS) via ESP32 and Java.*
 
-# 📻 Transmissão Assíncrona Out-of-Band via RDS para Sistemas Embarcados
+# 📻 Asynchronous Out-of-Band Transmission via RDS for Embedded Systems
 
-Este repositório contém o código-fonte (software e firmware) e as instruções de replicação de hardware para o projeto de pesquisa **"Transmissão Assíncrona de Strings de Controle para Microcontroladores via RDS"**, submetido à ACM.
+This repository contains the source code (software and firmware) and hardware replication instructions for the research project **"Asynchronous Transmission of Control Strings for Microcontrollers via RDS"**, submitted to the ACM.
 
-O sistema propõe uma infraestrutura de comunicação resiliente e de baixo custo, utilizando a subportadora de 57 kHz de rádio FM (RDS) para enviar cadeias de caracteres (strings) a dispositivos embarcados sem a necessidade de conectividade IP (Internet). 
+The system proposes a resilient, low-cost communication infrastructure using the 57 kHz FM radio subcarrier (RDS) to send character strings to embedded devices without the need for IP connectivity (Internet). 
 
-Este repositório inclui a implementação do Orquestrador Java (Terminal de Injeção) e os firmwares contendo os mecanismos de estabilidade (*Padding* dinâmico) e filtragem heurística de ruído (*Vassoura Digital*).
-
----
-
-## 🛠️ Requisitos de Hardware
-
-Para replicar este experimento, você precisará dos seguintes componentes COTS (*Commercial Off-The-Shelf*):
-
-**Nó Transmissor (TX):**
-* 1x Microcontrolador ESP32
-* 1x Transmissor FM Adafruit Si4713
-* Fios de jumper (Jumpers)
-
-**Nó Receptor (RX):**
-* 1x Microcontrolador ESP8266 (NodeMCU)
-* 1x Receptor FM SparkFun Si4703 (ou módulo equivalente suportado pela biblioteca SI470X)
-* 1x Cabo de áudio P2 (utilizado passivamente na porta de fones para atuar como antena na malha de aterramento)
+This repository includes the implementation of the Java Orchestrator (Injection Terminal) and the firmwares containing the stability mechanisms (Dynamic *Padding*) and heuristic noise filtering (*Digital Broom*).
 
 ---
 
-## 🔌 Esquema de Ligações (Pinagem)
+## 🛠️ Hardware Requirements
 
-### Ligações do Transmissor (ESP32 + Si4713)
-| ESP32 Pin | Si4713 Pin | Função |
-| :--- | :--- | :--- |
-| 3V3 | VIN | Alimentação |
-| GND | GND | Terra |
-| D21 | SDA | Dados I2C |
-| D22 | SCL | Clock I2C |
-| D27 | RST | Reset de Hardware |
+To replicate this experiment, you will need the following COTS (*Commercial Off-The-Shelf*) components:
 
-### Ligações do Receptor (ESP8266 + Si4703)
-| ESP8266 Pin | Si4703 Pin | Função |
-| :--- | :--- | :--- |
-| 3V3 | 3.3V | Alimentação |
-| GND | GND | Terra |
-| D2 | SDIO | Dados I2C |
-| D1 | SCLK | Clock I2C |
-| D5 | RST | Reset de Hardware |
+**Transmitter Node (TX):**
+* 1x ESP32 Microcontroller
+* 1x Adafruit Si4713 FM Transmitter
+* Jumper wires
 
-### Receptor Secundario (ESP8266 + RDA 5807M)
-| ESP8266 Pin | RDA 5807M Pin | Função |
-| :--- | :--- | :--- |
-| 3V3 | VIN | Alimentação |
-| GND | GND | Terra |
-| D3 | SDA | Dados I2C |
-| D4 | SCL | Clock I2C |
+**Receiver Node (RX):**
+* 1x ESP8266 Microcontroller (NodeMCU)
+* 1x SparkFun Si4703 FM Receiver (or equivalent module supported by the SI470X library)
+* 1x 3.5mm audio cable (used passively in the headphone jack to act as an antenna in the grounding loop)
 
 ---
 
-## 💻 Instalação e Execução
+## 🔌 Wiring Diagram (Pinout)
 
-### Passo 1: Preparando o Hardware (Firmwares)
-1. **Instalação de Drivers USB:** Certifique-se de que o seu sistema operacional possui os drivers adequados para comunicação serial. O NodeMCU (ESP8266) comumente requer o driver **CP210x USB to UART Bridge da Silicon Labs** (ou CH340, dependendo da fabricante da placa).
-2. Abra a IDE do Arduino.
-3. Certifique-se de instalar as seguintes bibliotecas através do Library Manager:
-   * `Adafruit Si4713 Library` (Para o nó Transmissor)
-   * `PU2CLR SI470X` (Para o nó Receptor)
-4. Conecte o **ESP32**, abra o código presente na pasta `Firmware-TX/Si4713`, compile e faça o upload.
-5. Conecte o **ESP8266**, abra o código presente na pasta `Firmware-RX/Si4703`, compile e faça o upload.
+### Transmitter Wiring (ESP32 + Si4713)
+| ESP32 Pin | Si4713 Pin | Function |
+| :--- | :--- | :--- |
+| 3V3 | VIN | Power |
+| GND | GND | Ground |
+| D21 | SDA | I2C Data |
+| D22 | SCL | I2C Clock |
+| D27 | RST | Hardware Reset |
 
-### ⚠️ Nota de Compilação e Conflitos I2C (Troubleshooting)
-Devido às diferenças arquitetônicas entre a família AVR tradicional e a família Espressif (ESP32/ESP8266), pode ocorrer um atropelamento na alocação dos pinos do barramento I2C por parte das bibliotecas originais. 
+### Receiver Wiring (ESP8266 + Si4703)
+| ESP8266 Pin | Si4703 Pin | Function |
+| :--- | :--- | :--- |
+| 3V3 | 3.3V | Power |
+| GND | GND | Ground |
+| D2 | SDIO | I2C Data |
+| D1 | SCLK | I2C Clock |
+| D5 | RST | Hardware Reset |
 
-**Caso o transceptor não seja detectado no monitor serial (Erro no ESP8266 + SI470X):**
-1. Navegue até a pasta de bibliotecas da IDE do Arduino (geralmente em `Documentos/Arduino/libraries/`).
-2. Dentro da pasta `libraries`, procure pela pasta `PU2CLR_SI470X` Abra o arquivo fonte `SI470X.cpp` da biblioteca do receptor.
-3. Localize a instrução `Wire.end();` dentro do método de inicialização/setup e **comente-a** (adicionando `//` no início da linha). 
-4. Salve o arquivo e recompile. Isso impedirá que a biblioteca encerre o barramento prematuramente e a obrigará a respeitar os pinos (`D2` e `D1`) definidos pelo seu *firmware*.
+### Secondary Receiver (ESP8266 + RDA 5807M)
+| ESP8266 Pin | RDA 5807M Pin | Function |
+| :--- | :--- | :--- |
+| 3V3 | VIN | Power |
+| GND | GND | Ground |
+| D3 | SDA | I2C Data |
+| D4 | SCL | I2C Clock |
 
+---
 
-### Passo 2: O Orquestrador Java
-O Orquestrador foi desenvolvido em Java com interface gráfica Swing e gerenciamento via Maven.
-1. Instale o Java JDK 23 (ou superior) e o Maven em sua máquina.
-2. Faça o download do código-fonte deste repositório (via arquivo `.zip` disponibilizado pela plataforma de revisão) e extraia em sua máquina.
-3. Navegue até a pasta Java-Orquestrador.
-4. O projeto utiliza a biblioteca jSerialComm para comunicação USB assíncrona. A dependência já está configurada no pom.xml.
-5. Execute a aplicação via IDE (como VS Code, IntelliJ, Eclipse) ou linha de comando.
+## 💻 Installation and Execution
 
-### Passo 3: Operando o Sistema
-1. Alimente o ESP8266 (Receptor) via USB (apenas para energia) ou bateria. execute o aplicativo em Java e se conecte a porta correspondente ao RX (receptor)
+### Step 1: Preparing the Hardware (Firmwares)
+1. **USB Drivers Installation:** Ensure your operating system has the proper drivers for serial communication. The NodeMCU (ESP8266) commonly requires the **Silicon Labs CP210x USB to UART Bridge** driver (or CH340, depending on the board manufacturer).
+2. Open the Arduino IDE.
+3. Make sure to install the following libraries via the Library Manager:
+   * `Adafruit Si4713 Library` (For the Transmitter node)
+   * `PU2CLR SI470X` (For the Receiver node)
+4. Connect the **ESP32**, open the code located in the `Firmware-TX/Si4713` folder, compile, and upload it.
+5. Connect the **ESP8266**, open the code located in the `Firmware-RX/Si4703` folder, compile, and upload it.
 
-2. Conecte o ESP32 (Transmissor) na porta USB do seu computador principal.
+### ⚠️ Compilation Note & I2C Conflicts (Troubleshooting)
+Due to architectural differences between the traditional AVR family and the Espressif family (ESP32/ESP8266), original libraries might overwrite the I2C bus pin allocation. 
 
-3. Abra o Orquestrador Java, selecione a porta COM correspondente ao Transmissor e clique em "CONECTAR".
+**If the transceiver is not detected in the serial monitor (Error on ESP8266 + SI470X):**
+1. Navigate to your Arduino libraries folder (usually `Documents/Arduino/libraries/`).
+2. Inside the `libraries` folder, look for the `PU2CLR_SI470X` folder and open the `SI470X.cpp` source file.
+3. Locate the `Wire.end();` instruction inside the initialization/setup method and **comment it out** (by adding `//` at the beginning of the line). 
+4. Save the file and recompile. This will prevent the library from closing the bus prematurely and force it to respect the pins (`D2` and `D1`) defined by your firmware.
 
-4. A interface realizará o Handshake Ativo, identificará o terminal (se é receptor ou se é Transmissor) e liberará o campo de texto para a injeção da string para o transmissor, do contrário, o app em java ativará o modo passivo de escuta RDS.
+### Step 2: The Java Orchestrator
+The Orchestrator was developed in Java with a Swing GUI and managed via Maven.
+1. Install Java JDK 23 (or higher) and Maven on your machine.
+2. Download the source code from this repository (via the `.zip` file provided by the review platform) and extract it to your machine.
+3. Navigate to the `Java-Orquestrador` folder.
+4. The project uses the `jSerialComm` library for asynchronous USB communication. The dependency is already configured in the `pom.xml`.
+5. Run the application via an IDE (like VS Code, IntelliJ, Eclipse) or through the command line.
 
-5. Digite um payload e envie. O dado será encapsulado em 64 bytes, transmitido em 106.1 MHz, recebido pelo nó remoto, filtrado pela Vassoura Digital e exibido de forma íntegra.
+### Step 3: Operating the System
+1. Power the ESP8266 (Receiver) via USB (for power only) or a battery. Run the Java application and connect to the COM port corresponding to the RX (receiver).
+2. Connect the ESP32 (Transmitter) to a USB port on your main computer.
+3. Open the Java Orchestrator, select the COM port corresponding to the Transmitter, and click "CONNECT" ("CONECTAR").
+4. The interface will perform the Active Handshake, identify the terminal (whether it is a receiver or a transmitter), and unlock the text field to inject the string for the transmitter; otherwise, the Java app will activate the passive RDS listening mode.
+5. Type a payload and send it. The data will be encapsulated in 64 bytes, transmitted at 106.1 MHz, received by the remote node, filtered by the Digital Broom, and displayed intact.
 
-## 📄 Licença
-Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para detalhes.
+## 📄 License
+This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 📖 Como Citar (Citation)
-*(Nota: Informações de autoria e afiliação institucional foram suprimidas para garantir a integridade da revisão double-blind. A citação completa será disponibilizada na versão final (camera-ready) após o aceite).*
+## 📖 Citation
+*(Note: Author and institutional affiliation information have been suppressed to ensure double-blind review integrity. The full citation will be available in the camera-ready version upon acceptance).*
 
 ```bibtex
-@inproceedings{Anonimo2026RDS,
-  author = {Autores Omitidos para Revisão Duplo-Cego},
-  title = {Transmissão Assíncrona de Strings de Controle para Microcontroladores via RDS},
+@inproceedings{Anonymous2026RDS,
+  author = {Authors Omitted for Double-Blind Review},
+  title = {Asynchronous Transmission of Control Strings for Microcontrollers via RDS},
   year = {2026},
   publisher = {ACM},
-  booktitle = {Proceedings of the ACM Conference (Sob Revisão)}
+  booktitle = {Proceedings of the ACM Conference (Under Review)}
 }
