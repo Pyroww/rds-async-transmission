@@ -59,7 +59,7 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 ---
 
 ## 💻 Instalação e Execução
-[Texto do link](https://seu-link.com)
+
 ### Passo 1: Preparando o Hardware (Firmwares)
 1. **Instalação de Drivers USB:** Certifique-se de que o seu sistema operacional possui os drivers adequados para comunicação serial. O NodeMCU (ESP8266) comumente requer o driver [**CP210x USB to UART Bridge da Silicon Labs**](https://www.silabs.com/software-and-tools/usb-to-uart-bridge-vcp-drivers?tab=downloads), se caso o driver inicial não funcionar, instale o [driver CH340](https://sparks.gogo.co.nz/ch340.html)
 2. Abra a IDE do Arduino.
