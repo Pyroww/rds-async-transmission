@@ -95,7 +95,7 @@ The Orchestrator was developed in Java with a Swing GUI and managed via Maven.
 5. Type a payload and send it. The data will be encapsulated in 64 bytes, transmitted at 106.1 MHz, received by the remote node, filtered by the Digital Broom, and displayed intact.
 
 ## 📄 License
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the GNU GPLv3 License - see the LICENSE file for details.
 
 ## 📖 Citation
 *(Note: Author and institutional affiliation information have been suppressed to ensure double-blind review integrity. The full citation will be available in the camera-ready version upon acceptance).*
