@@ -99,7 +99,7 @@ O Orquestrador foi desenvolvido em Java com interface gráfica Swing e gerenciam
 5. Digite um payload e envie. O dado será encapsulado em 64 bytes, transmitido em 106.1 MHz, recebido pelo nó remoto, filtrado pela Vassoura Digital e exibido de forma íntegra.
 
 ## 📄 Licença
-Este projeto está licenciado sob a Licença MIT - veja o arquivo LICENSE para detalhes.
+Este projeto está licenciado sob a Licença GNU GPLv3 - veja o arquivo LICENSE para detalhes.
 
 ## 📖 Como Citar (Citation)
 *(Nota: Informações de autoria e afiliação institucional foram suprimidas para garantir a integridade da revisão double-blind. A citação completa será disponibilizada na versão final (camera-ready) após o aceite).*
