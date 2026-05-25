@@ -120,7 +120,7 @@ if (payloadJava.length() > 64) {
 radio.setRDSbuffer(payloadJava.c_str());
 ```
 
-5.2. Filtro digital (`limparTexto`)
+### 5.2. Filtro digital (limparTexto)
 A subportadora de 57 kHz modulada em FM é altamente vulnerável a ruídos impulsivos e interferências eletromagnéticas (EMI). Esses fenômenos distorcem os bits demodulados, inserindo caracteres de controle não-imprimíveis ou lixo de memória na string final.
 
 Ambos os firmwares receptores contornam essa degradação aplicando uma varredura linear iterativa baseada na função `isprint()`. O algoritmo inspeciona cada índice do array de caracteres recebido e substitui qualquer byte corrompido ou invisível por um caractere de espaço em branco neutro (`' '`), impedindo a quebra de renderização na camada de aplicação:
@@ -134,7 +134,7 @@ void limparTexto(char* texto) {
   }
 }
 ```
-5.3. Filtro de Redundância de Estado e Telemetria Delta (Nós Receptores)
+### 5.3. Filtro de Redundância de Estado e Telemetria Delta (Nós Receptores)
 
 Como o sinal de rádio varre o espectro continuamente, o mesmo pacote de dados é decodificado repetidamente pelo chip de rádio (múltiplas vezes por segundo). Para evitar o entupimento do canal de comunicação USB do host e quantificar o desempenho temporal do enlace, o loop dos receptores implementa um mecanismo de trava de estado associado a um cronômetro por hardware baseado em `millis()`:
 ```
