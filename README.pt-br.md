@@ -29,6 +29,7 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 ---
 
 ## 🔌 Esquema de Ligações (Pinagem)
+Importante ressaltar, que para melhor visualização, existe o diagrama ilustrativo no diretório `Data/`, contendo cada um das tabelas de esquemas abaixo
 
 ### Ligações do Transmissor (ESP32 + Si4713)
 | ESP32 Pin | Si4713 Pin | Função |
