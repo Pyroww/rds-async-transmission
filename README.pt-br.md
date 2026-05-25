@@ -8,7 +8,7 @@ Este repositório contém o código-fonte (software e firmware) e as instruçõe
 
 O sistema propõe uma infraestrutura de comunicação resiliente e de baixo custo, utilizando a subportadora de 57 kHz de rádio FM (RDS) para enviar cadeias de caracteres (strings) a dispositivos embarcados sem a necessidade de conectividade IP (Internet). 
 
-Este repositório inclui a implementação do Orquestrador Java (Terminal de Injeção) e os firmwares contendo os mecanismos de estabilidade (*Padding* dinâmico) e filtragem heurística de ruído (*Vassoura Digital*).
+Este repositório inclui a implementação do Orquestrador Java (Terminal de Injeção) e os firmwares contendo os mecanismos de estabilidade (*Padding* dinâmico) e filtragem heurística de ruído.
 
 ---
 
@@ -31,25 +31,35 @@ Para replicar este experimento, você precisará dos seguintes componentes COTS 
 ## 🔌 Esquema de Ligações (Pinagem)
 Importante ressaltar, que para melhor visualização, existe o diagrama ilustrativo no diretório `Data/`, contendo cada um das tabelas de esquemas abaixo, bem como anexadas as suas devidas tabelas neste manual de replicação:
 
-![Diagrama de conexões do Transmissor e dos Receptores](Data/DIAGRAMA_ESP32_+_Si4713.jpg)
-
 ### Ligações do Transmissor (ESP32 + Si4713)
-| ESP32 Pin | Si4713 Pin | Função |
-| :--- | :--- | :--- |
-| 3V3 | VIN | Alimentação |
-| GND | GND | Terra |
-| D21 | SDA | Dados I2C |
-| D22 | SCL | Clock I2C |
-| D27 | RST | Reset de Hardware |
+><p align="left">
+>  <img src="Data/DIAGRAMA_ESP32_+_Si4713.jpg" width="75%" alt="Diagrama de conexões do transmissor">
+></p>
+>
+> **📌 Mapeamento de Pinos (Pinout)**
+> 
+> A tabela abaixo detalha as conexões físicas ilustradas no diagrama de montagem superior:
+>
+> | ESP32 (Host) | Si4713 (Módulo) | Função Técnica |
+> | :--- | :--- | :--- |
+> | **3V3** | `VIN` | Alimentação Elétrica (3.3V) |
+> | **GND** | `GND` | Referência de Aterramento |
+> | **D21** | `SDA` | Dados do Barramento I2C |
+> | **D22** | `SCL` | Clock do Barramento I2C |
+> | **D27** | `RST` | Controle de Reset de Hardware |
 
 ### Ligações do Receptor (ESP8266 + Si4703)
-| ESP8266 Pin | Si4703 Pin | Função |
-| :--- | :--- | :--- |
-| 3V3 | 3.3V | Alimentação |
-| GND | GND | Terra |
-| D2 | SDIO | Dados I2C |
-| D1 | SCLK | Clock I2C |
-| D5 | RST | Reset de Hardware |
+><p align="left">
+>  <img src="Data/DIAGRAMA_ESP32_+_Si4713.jpg" width="75%" alt="Diagrama de conexões do transmissor">
+></p>
+>
+>| ESP8266 Pin | Si4703 Pin | Função |
+>| :--- | :--- | :--- |
+>| 3V3 | 3.3V | Alimentação |
+>| GND | GND | Terra |
+>| D2 | SDIO | Dados I2C |
+>| D1 | SCLK | Clock I2C |
+>| D5 | RST | Reset de Hardware |
 
 ### Receptor Secundario (ESP8266 + RDA 5807M)
 | ESP8266 Pin | RDA 5807M Pin | Função |
