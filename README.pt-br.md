@@ -62,12 +62,16 @@ Importante ressaltar, que para melhor visualização, existe o diagrama ilustrat
 >| D5 | RST | Reset de Hardware |
 
 ### Receptor Secundario (ESP8266 + RDA 5807M)
-| ESP8266 Pin | RDA 5807M Pin | Função |
-| :--- | :--- | :--- |
-| 3V3 | VIN | Alimentação |
-| GND | GND | Terra |
-| D3 | SCL | Dados I2C |
-| D4 | SDA | Clock I2C |
+><p align="left">
+>  <img src="Data/Diagrama_Esp8266_+_RDA5807M.jpg" width="75%" alt="Diagrama de conexões do transmissor">
+></p>
+>
+>| ESP8266 Pin | RDA 5807M Pin | Função |
+>| :--- | :--- | :--- |
+>| 3V3 | VIN | Alimentação |
+>| GND | GND | Terra |
+>| D3 | SCL | Dados I2C |
+>| D4 | SDA | Clock I2C |
 
 ---
 
