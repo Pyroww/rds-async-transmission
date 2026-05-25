@@ -50,7 +50,7 @@ Importante ressaltar, que para melhor visualização, existe o diagrama ilustrat
 
 ### Ligações do Receptor (ESP8266 + Si4703)
 ><p align="left">
->  <img src="Data/DIAGRAMA_ESP32_+_Si4713.jpg" width="75%" alt="Diagrama de conexões do transmissor">
+>  <img src="Data/Diagrama_ESP8266_+_Si4703.jpg" width="75%" alt="Diagrama de conexões do transmissor">
 ></p>
 >
 >| ESP8266 Pin | Si4703 Pin | Função |
