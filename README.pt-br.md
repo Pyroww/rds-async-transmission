@@ -4,7 +4,7 @@
 
 # 📻 Transmissão Assíncrona Out-of-Band via RDS para Sistemas Embarcados
 
-Este repositório contém o código-fonte (software e firmware) e as instruções de replicação de hardware para o projeto de pesquisa **"Using the FM Infrastructure as a Control Channel via RDS"**, submetido à ACM.
+Este repositório contém o código-fonte (software e firmware) e as instruções de replicação de hardware para o projeto de pesquisa **"Usando a Infraestrutura FM como Canal de Controle por RDS"**, submetido à ACM.
 
 O sistema propõe uma infraestrutura de comunicação resiliente e de baixo custo, utilizando a subportadora de 57 kHz de rádio FM (RDS) para enviar cadeias de caracteres (strings) a dispositivos embarcados sem a necessidade de conectividade IP (Internet). 
 
