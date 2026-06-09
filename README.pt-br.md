@@ -124,7 +124,7 @@ Este projeto está licenciado sob a Licença GNU GPLv3 - veja o arquivo LICENSE 
 ```bibtex
 @inproceedings{Anonimo2026RDS,
   author = {Autores Omitidos para Revisão Duplo-Cego},
-  title = {Transmissão Assíncrona de Strings de Controle para Microcontroladores via RDS},
+  title = {Usando a Infraestrutura FM como Canal de Controle por RDS},
   year = {2026},
   publisher = {ACM},
   booktitle = {Proceedings of the ACM Conference (Sob Revisão)}
