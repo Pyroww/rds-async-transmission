@@ -4,7 +4,7 @@
 
 # 📻 Asynchronous Out-of-Band Transmission via RDS for Embedded Systems
 
-This repository contains the source code (software and firmware) and hardware replication instructions for the research project **"Using the FM Infrastructure as a Control Channel via RDS"**, submitted to the ACM.
+This repository contains the source code (software and firmware) and hardware replication instructions for the research project **"Using the FM Infrastructure as a Control Channel via RDS"**, submitted to the SBESC.
 
 The system proposes a resilient, low-cost communication infrastructure using the 57 kHz FM radio subcarrier (RDS) to send character strings to embedded devices without requiring IP (Internet) connectivity. 
 
@@ -126,6 +126,6 @@ This project is licensed under the GNU GPLv3 License - see the LICENSE file for 
   author = {Authors Omitted for Double-Blind Review},
   title = {Using the FM Infrastructure as a Control Channel via RDS},
   year = {2026},
-  publisher = {ACM},
-  booktitle = {Proceedings of the ACM Conference (Under Review)}
+  publisher = {SBESC},
+  booktitle = {Proceedings of the SBESC Conference (Under Review)}
 }
